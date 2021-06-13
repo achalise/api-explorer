@@ -1,8 +1,15 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 //import logo from './logo.svg';
 // import './App.css';
 import './styles.css';
-import CovidExplorer from './CovidExplorer';
+import CovidExplorer from './components/CovidExplorer/CovidExplorer';
 
 const NavBar = () => {
   return (
@@ -111,13 +118,36 @@ const PageFooter = () => {
   );
 }
 
+const Routes = () => {
+  return (
+<Router>
+      <div>
+        {/*
+          A <Switch> looks through all its children <Route>
+          elements and renders the first one whose path
+          matches the current URL. Use a <Switch> any time
+          you have multiple routes, but you want only one
+          of them to render at a time
+        */}
+        <Switch>
+          <Route exact path="/">
+            <PageContent />
+          </Route>
+          <Route path="/covid">
+            <CovidExplorer/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
+}
+
 function App() {
   return (
     <div className="App">
-      <CovidExplorer></CovidExplorer>
       <NavBar></NavBar>
       <Header></Header>
-      <PageContent></PageContent>
+      <Routes></Routes>
       <PageFooter></PageFooter>
     </div>
   );
